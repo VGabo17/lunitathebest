@@ -122,11 +122,36 @@ const viewButtons = document.querySelectorAll(".view-btn");
 const searchInput = document.getElementById("search-input");
 const modal = document.getElementById("modal");
 const toast = document.getElementById("toast");
+const menuToggle = document.getElementById("menu-toggle");
+const mobileDrawer = document.getElementById("mobile-drawer");
+const isFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
 const getInitials = (name) =>
   name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase();
 
-/* 1. Renderizado dinámico de tarjetas */
+/* 1. Cinta infinita (Marquee) */
+function initMarquee() {
+  const track = document.getElementById("marquee-track");
+  const itemsHTML = EXPERIENCES.map(
+    (item) => `<span class="marquee-item"><strong>${item.role}</strong> • ${item.name}</span>`
+  ).join("");
+  track.innerHTML = itemsHTML + itemsHTML;
+}
+
+/* 2. Contadores automáticos */
+function setupCounters() {
+  const total = EXPERIENCES.length;
+  const active = EXPERIENCES.filter((e) => e.active).length;
+  const leadership = EXPERIENCES.filter((e) => e.category === "leadership").length;
+  const staff = EXPERIENCES.filter((e) => e.category === "staff").length;
+
+  document.getElementById("stat-total").dataset.target = total;
+  document.getElementById("stat-active").dataset.target = active;
+  document.getElementById("stat-leadership").dataset.target = leadership;
+  document.getElementById("stat-staff").dataset.target = staff;
+}
+
+/* 3. Renderizado de tarjetas */
 function renderCards() {
   const filtered = EXPERIENCES.filter((item) => {
     const matchesFilter =
@@ -151,7 +176,7 @@ function renderCards() {
   filtered.forEach((item, index) => {
     const card = document.createElement("article");
     card.className = "card";
-    card.style.animationDelay = `${index * 35}ms`;
+    card.style.animationDelay = `${index * 30}ms`;
 
     const badgeClass = item.active ? "badge-active" : "badge-past";
     const badgeText = item.active ? "Actual" : "Trayectoria";
@@ -177,31 +202,33 @@ function renderCards() {
       </div>
     `;
 
-    // Efecto Spotlight + inclinación 3D sutil
-    card.addEventListener("mousemove", (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      card.style.setProperty("--mouse-x", `${x}px`);
-      card.style.setProperty("--mouse-y", `${y}px`);
+    // Solo activar 3D y spotlight en dispositivos con mouse
+    if (isFinePointer) {
+      card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty("--mouse-x", `${x}px`);
+        card.style.setProperty("--mouse-y", `${y}px`);
 
-      if (state.view === "grid") {
-        const rotateX = ((y / rect.height) - 0.5) * -6;
-        const rotateY = ((x / rect.width) - 0.5) * 6;
-        card.style.transform = `perspective(700px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
-      }
-    });
+        if (state.view === "grid") {
+          const rotateX = ((y / rect.height) - 0.5) * -6;
+          const rotateY = ((x / rect.width) - 0.5) * 6;
+          card.style.transform = `perspective(700px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+        }
+      });
 
-    card.addEventListener("mouseleave", () => {
-      card.style.transform = "";
-    });
+      card.addEventListener("mouseleave", () => {
+        card.style.transform = "";
+      });
+    }
 
     card.addEventListener("click", () => openModal(item));
     cardsGrid.appendChild(card);
   });
 }
 
-/* 2. Modal */
+/* 4. Modal */
 function openModal(item) {
   const modalIcon = document.getElementById("modal-icon");
   const modalBadge = document.getElementById("modal-badge");
@@ -226,14 +253,16 @@ function openModal(item) {
 
   modal.classList.add("open");
   modal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
 }
 
 function closeModal() {
   modal.classList.remove("open");
   modal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
 }
 
-/* 3. Efecto Typewriter */
+/* 5. Typewriter */
 function initTypewriter() {
   const phrases = [
     "Founder en Synthetix Studio",
@@ -252,24 +281,24 @@ function initTypewriter() {
 
     if (!deleting && charIdx < current.length) {
       charIdx++;
-      setTimeout(tick, 65);
+      setTimeout(tick, 60);
     } else if (!deleting && charIdx === current.length) {
       deleting = true;
-      setTimeout(tick, 1700);
+      setTimeout(tick, 1750);
     } else if (deleting && charIdx > 0) {
       charIdx--;
-      setTimeout(tick, 35);
+      setTimeout(tick, 32);
     } else {
       deleting = false;
       phraseIdx = (phraseIdx + 1) % phrases.length;
-      setTimeout(tick, 300);
+      setTimeout(tick, 280);
     }
   }
 
   tick();
 }
 
-/* 4. Partículas rojo vino en Canvas */
+/* 6. Partículas Rojo Vino */
 function initParticles() {
   const canvas = document.getElementById("particles-canvas");
   const ctx = canvas.getContext("2d");
@@ -281,14 +310,14 @@ function initParticles() {
   }
 
   function createParticles() {
-    const count = Math.min(45, Math.floor(window.innerWidth / 28));
+    const count = Math.min(42, Math.floor(window.innerWidth / 24));
     particles = Array.from({ length: count }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      r: Math.random() * 2.2 + 0.7,
-      vy: -(Math.random() * 0.45 + 0.15),
-      vx: (Math.random() - 0.5) * 0.25,
-      alpha: Math.random() * 0.5 + 0.2
+      r: Math.random() * 2 + 0.6,
+      vy: -(Math.random() * 0.4 + 0.15),
+      vx: (Math.random() - 0.5) * 0.22,
+      alpha: Math.random() * 0.45 + 0.2
     }));
   }
 
@@ -303,7 +332,7 @@ function initParticles() {
       }
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255, 59, 92, ${p.alpha})`;
+      ctx.fillStyle = `rgba(255, 51, 85, ${p.alpha})`;
       ctx.fill();
     });
     requestAnimationFrame(animate);
@@ -318,7 +347,7 @@ function initParticles() {
   });
 }
 
-/* 5. Animaciones al hacer scroll (Reveal, Skills y Contadores) */
+/* 7. Observadores de Scroll */
 function initScrollObservers() {
   const observer = new IntersectionObserver(
     (entries) => {
@@ -326,18 +355,16 @@ function initScrollObservers() {
         if (!entry.isIntersecting) return;
         entry.target.classList.add("visible");
 
-        // Animar barras de habilidades
         entry.target.querySelectorAll(".skill-fill").forEach((bar) => {
           bar.style.width = bar.dataset.width;
         });
 
-        // Animar contadores
         entry.target.querySelectorAll(".counter").forEach((counter) => {
           if (counter.dataset.done) return;
           counter.dataset.done = "true";
-          const target = Number(counter.dataset.target);
+          const target = Number(counter.dataset.target || 0);
           let current = 0;
-          const step = Math.max(1, Math.ceil(target / 20));
+          const step = Math.max(1, Math.ceil(target / 18));
           const timer = setInterval(() => {
             current += step;
             if (current >= target) {
@@ -350,12 +377,11 @@ function initScrollObservers() {
         });
       });
     },
-    { threshold: 0.15 }
+    { threshold: 0.12 }
   );
 
   document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 
-  // Barra superior de progreso
   window.addEventListener("scroll", () => {
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
@@ -363,15 +389,28 @@ function initScrollObservers() {
   });
 }
 
-/* 6. Copiar Discord */
+/* 8. Menú Móvil & Copiar Discord */
+function toggleMobileMenu(forceClose = false) {
+  const isOpen = forceClose ? false : !mobileDrawer.classList.contains("open");
+  mobileDrawer.classList.toggle("open", isOpen);
+  mobileDrawer.setAttribute("aria-hidden", String(!isOpen));
+  menuToggle.classList.toggle("open", isOpen);
+  menuToggle.setAttribute("aria-expanded", String(isOpen));
+}
+
 function copyDiscord() {
   navigator.clipboard.writeText("lunitathebest").then(() => {
     toast.classList.add("show");
-    setTimeout(() => toast.classList.remove("show"), 2500);
+    setTimeout(() => toast.classList.remove("show"), 2400);
   });
 }
 
 /* Eventos */
+menuToggle.addEventListener("click", () => toggleMobileMenu());
+document.querySelectorAll(".drawer-link").forEach((link) => {
+  link.addEventListener("click", () => toggleMobileMenu(true));
+});
+
 filterButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
     filterButtons.forEach((b) => b.classList.remove("active"));
@@ -406,6 +445,8 @@ document.getElementById("copy-discord-footer").addEventListener("click", copyDis
 document.getElementById("year").textContent = new Date().getFullYear();
 
 /* Inicio */
+setupCounters();
+initMarquee();
 renderCards();
 initTypewriter();
 initParticles();
