@@ -8,17 +8,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=5" />
 </head>
 <body>
   <div id="scroll-progress" class="scroll-progress"></div>
 
-  <!-- Fondo de rejilla sutil + partículas -->
+  <!-- Capas ambientales de fondo -->
   <div class="bg-grid" aria-hidden="true"></div>
   <canvas id="particles-canvas" aria-hidden="true"></canvas>
   <div class="bg-glow" aria-hidden="true"></div>
 
-  <!-- Navbar responsiva -->
+  <!-- Navbar -->
   <header class="navbar">
     <div class="container nav-content">
       <a href="#inicio" class="brand">
@@ -45,7 +45,6 @@
       </button>
     </div>
 
-    <!-- Menú desplegable para móvil -->
     <div id="mobile-drawer" class="mobile-drawer" aria-hidden="true">
       <a href="#inicio" class="drawer-link">Inicio</a>
       <a href="#especialidades" class="drawer-link">Especialidades</a>
@@ -57,13 +56,13 @@
   <main>
     <!-- Hero -->
     <section id="inicio" class="hero container">
-      <div class="hero-card reveal">
+      <div class="hero-card">
         <div class="avatar-box">
           <div class="avatar-ring"></div>
           <div class="avatar-wrapper">
             <img
               src="assets/avatar.gif"
-              alt="Avatar animado de lunitathebest"
+              alt="Avatar de lunitathebest"
               onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='assets/avatar.png';}else{this.style.display='none';this.nextElementSibling.style.display='flex';}"
             />
             <div class="avatar-fallback">L</div>
@@ -83,11 +82,11 @@
           </p>
 
           <p class="hero-desc">
-            Founder, Manager y Staff con sólida experiencia liderando equipos, fundando estudios digitales y haciendo crecer comunidades y networks de Minecraft.
+            Founder, Manager y Staff con sólida trayectoria dirigiendo equipos, fundando estudios digitales y escalando servidores y comunidades de Minecraft al más alto nivel.
           </p>
 
           <div class="hero-actions">
-            <a href="#experiencia" class="btn btn-primary">Explorar trayectoria</a>
+            <a href="#experiencia" class="btn btn-primary btn-shine">Explorar trayectoria</a>
             <button id="copy-discord" class="btn btn-outline" type="button">
               <span class="btn-dot"></span>
               Discord: lunitathebest
@@ -96,80 +95,92 @@
         </div>
       </div>
 
-      <!-- Cinta infinita de proyectos -->
-      <div class="marquee-wrapper reveal" aria-label="Proyectos destacados">
+      <!-- Cinta infinita -->
+      <div class="marquee-wrapper" aria-label="Proyectos destacados">
         <div id="marquee-track" class="marquee-track"></div>
       </div>
 
-      <!-- Contadores automáticos -->
-      <div class="stats-grid reveal">
+      <!-- Contadores -->
+      <div class="stats-grid">
         <div class="stat-box">
-          <strong class="counter" id="stat-total">0</strong>
+          <strong class="counter" id="stat-total">12</strong>
           <span>Proyectos Totales</span>
         </div>
         <div class="stat-box">
-          <strong class="counter" id="stat-active">0</strong>
+          <strong class="counter" id="stat-active">3</strong>
           <span>Cargos Activos</span>
         </div>
         <div class="stat-box">
-          <strong class="counter" id="stat-leadership">0</strong>
+          <strong class="counter" id="stat-leadership">8</strong>
           <span>Dirección / Founder</span>
         </div>
         <div class="stat-box">
-          <strong class="counter" id="stat-staff">0</strong>
+          <strong class="counter" id="stat-staff">4</strong>
           <span>Staff &amp; Dev</span>
         </div>
       </div>
     </section>
 
-    <!-- Bento Grid de Especialidades -->
+    <!-- Bento Grid Especialidades -->
     <section id="especialidades" class="skills container reveal">
       <div class="section-header">
         <div>
           <span class="section-tag">Capacidades</span>
           <h2>Especialidades</h2>
-          <p>Pilares de trabajo en cada comunidad, servidor o estudio.</p>
+          <p>Áreas clave donde aporto liderazgo, estructura y resultados.</p>
         </div>
       </div>
 
       <div class="bento-grid">
         <article class="bento-card bento-wide">
           <div class="bento-top">
-            <span class="bento-badge">01 • Liderazgo</span>
+            <span class="bento-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              01 • Liderazgo
+            </span>
             <strong>98%</strong>
           </div>
           <h3>Gestión &amp; Dirección de Staff</h3>
-          <p>Reclutamiento, capacitación, ascensos, resolución de conflictos internos y coordinación diaria de equipos completos.</p>
+          <p>Reclutamiento, capacitación, ascensos, control de calidad y coordinación diaria de equipos de moderación y administración.</p>
           <div class="skill-bar"><div class="skill-fill" data-width="98%"></div></div>
         </article>
 
         <article class="bento-card">
           <div class="bento-top">
-            <span class="bento-badge">02 • Crecimiento</span>
+            <span class="bento-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              02 • Crecimiento
+            </span>
             <strong>95%</strong>
           </div>
-          <h3>Administración de Comunidades</h3>
-          <p>Organización de eventos, retención de usuarios y estructura de Discord profesional.</p>
+          <h3>Gestión de Comunidades</h3>
+          <p>Dinámicas, eventos, retención de jugadores y arquitectura profesional en Discord.</p>
           <div class="skill-bar"><div class="skill-fill" data-width="95%"></div></div>
         </article>
 
         <article class="bento-card">
           <div class="bento-top">
-            <span class="bento-badge">03 • Visión</span>
+            <span class="bento-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              03 • Visión
+            </span>
             <strong>93%</strong>
           </div>
           <h3>Fundación de Proyectos</h3>
-          <p>Creación de marca, hoja de ruta y dirección ejecutiva para studios, tiendas y networks.</p>
+          <p>Identidad, estrategia comercial y dirección ejecutiva para studios, tiendas y networks.</p>
           <div class="skill-bar"><div class="skill-fill" data-width="93%"></div></div>
         </article>
 
         <article class="bento-card bento-wide">
           <div class="bento-top">
-            <span class="bento-badge">04 • Técnico</span>
+            <span class="bento-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              04 • Técnico
+            </span>
             <strong>86%</strong>
           </div>
           <h3>Desarrollo &amp; Configuración</h3>
-          <p>Soporte técnico, optimización de entornos, configuración de sistemas y resolución ágil de incidencias.</p>
+          <p>Soporte técnico, optimización de entornos, configuración de sistemas y resolución ágil de fallos en producción.</p>
           <div class="skill-bar"><div class="skill-fill" data-width="86%"></div></div>
         </article>
       </div>
@@ -181,17 +192,22 @@
         <div>
           <span class="section-tag">Historial</span>
           <h2>Experiencia &amp; Proyectos</h2>
-          <p>Toca cualquier tarjeta para abrir los detalles del cargo.</p>
+          <p>Toca cualquier tarjeta para ver el detalle del rango y funciones.</p>
         </div>
 
         <div class="controls-bar">
-          <input
-            type="search"
-            id="search-input"
-            class="search-input"
-            placeholder="Buscar servidor o rango..."
-            aria-label="Buscar servidor o rango"
-          />
+          <div class="search-wrap">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input
+              type="search"
+              id="search-input"
+              class="search-input"
+              placeholder="Buscar servidor o rango..."
+              aria-label="Buscar servidor o rango"
+            />
+          </div>
           <div class="view-toggle" role="group" aria-label="Cambiar vista">
             <button class="view-btn active" data-view="grid" type="button">Tarjetas</button>
             <button class="view-btn" data-view="timeline" type="button">Timeline</button>
@@ -214,9 +230,9 @@
     <section id="contacto" class="contact container reveal">
       <div class="contact-card">
         <span class="status-pill">Contacto Directo</span>
-        <h2>¿Listo para llevar tu proyecto al siguiente nivel?</h2>
-        <p>Escríbeme por Discord si buscas un Manager comprometido, Founder o Developer para tu comunidad.</p>
-        <button id="copy-discord-footer" class="btn btn-primary" type="button">
+        <h2>¿Llevamos tu proyecto al siguiente nivel?</h2>
+        <p>Escríbeme por Discord si necesitas dirección profesional, gestión de staff o desarrollo para tu servidor o estudio.</p>
+        <button id="copy-discord-footer" class="btn btn-primary btn-shine" type="button">
           Copiar Discord: lunitathebest
         </button>
       </div>
@@ -247,9 +263,10 @@
 
   <!-- Toast -->
   <div id="toast" class="toast" role="status" aria-live="polite">
-    Discord "lunitathebest" copiado
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    <span>Discord "lunitathebest" copiado</span>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=5"></script>
 </body>
 </html>
