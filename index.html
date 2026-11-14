@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>lunitathebest | Portafolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <header class="navbar">
+    <div class="container nav-content">
+      <a href="#inicio" class="brand">lunita<span>thebest</span></a>
+      <nav class="nav-links">
+        <a href="#experiencia">Trayectoria</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section id="inicio" class="hero container">
+      <div class="hero-card">
+        <div class="avatar-wrapper">
+          <img
+            src="assets/avatar.png"
+            alt="Avatar de lunitathebest"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          />
+          <div class="avatar-fallback">L</div>
+        </div>
+
+        <div class="hero-info">
+          <span class="status-pill">Disponible para proyectos</span>
+          <h1>Hola, soy <span>lunitathebest</span></h1>
+          <p class="hero-desc">
+            Founder, Manager y Staff con amplia trayectoria en comunidades, tiendas digitales y servidores de Minecraft. Enfocado en gestión, desarrollo y crecimiento de proyectos.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#experiencia" class="btn btn-primary">Ver trayectoria</a>
+            <button id="copy-discord" class="btn btn-outline" type="button">
+              Copiar Discord: lunitathebest
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Estadísticas dinámicas -->
+      <div class="stats-grid">
+        <div class="stat-box">
+          <strong id="stat-total">0</strong>
+          <span>Proyectos totales</span>
+        </div>
+        <div class="stat-box">
+          <strong id="stat-active">0</strong>
+          <span>Cargos actuales</span>
+        </div>
+        <div class="stat-box">
+          <strong id="stat-leadership">0</strong>
+          <span>Dirección / Founder</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de Trayectoria -->
+    <section id="experiencia" class="experience container">
+      <div class="section-header">
+        <div>
+          <h2>Experiencia &amp; Proyectos</h2>
+          <p>Filtra por estado o especialidad para explorar cada proyecto.</p>
+        </div>
+
+        <div class="filters" role="tablist" aria-label="Filtros de experiencia">
+          <button class="filter-btn active" data-filter="all">Todos</button>
+          <button class="filter-btn" data-filter="active">Actuales</button>
+          <button class="filter-btn" data-filter="leadership">Founder &amp; Manager</button>
+          <button class="filter-btn" data-filter="staff">Staff &amp; Dev</button>
+        </div>
+      </div>
+
+      <div id="cards-grid" class="cards-grid"></div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="contact container">
+      <div class="contact-card">
+        <h2>¿Trabajamos juntos?</h2>
+        <p>Si buscas gestión, liderazgo o desarrollo para tu servidor o comunidad, contáctame directamente por Discord.</p>
+        <button id="copy-discord-footer" class="btn btn-primary" type="button">
+          Discord: lunitathebest
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; <span id="year"></span> lunitathebest — Portafolio Profesional</p>
+  </footer>
+
+  <!-- Modal de detalles -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button id="modal-close" class="modal-close" aria-label="Cerrar">&times;</button>
+      <div class="modal-header">
+        <div id="modal-icon" class="modal-icon"></div>
+        <div>
+          <span id="modal-badge" class="badge"></span>
+          <h3 id="modal-title"></h3>
+          <p id="modal-role" class="modal-role"></p>
+        </div>
+      </div>
+      <p id="modal-desc" class="modal-desc"></p>
+    </div>
+  </div>
+
+  <!-- Notificación Toast -->
+  <div id="toast" class="toast" role="status" aria-live="polite">
+    Usuario copiado al portapapeles
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
