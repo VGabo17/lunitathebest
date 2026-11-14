@@ -3,19 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lunitathebest | Portafolio</title>
+  <title>lunitathebest | Portafolio Oficial</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- Barra de progreso de scroll -->
+  <div id="scroll-progress" class="scroll-progress"></div>
+
+  <!-- Partículas en canvas -->
+  <canvas id="particles-canvas" aria-hidden="true"></canvas>
   <div class="bg-glow" aria-hidden="true"></div>
 
   <header class="navbar">
     <div class="container nav-content">
-      <a href="#inicio" class="brand">lunita<span>thebest</span></a>
+      <a href="#inicio" class="brand">
+        <span class="brand-dot"></span>lunita<span>thebest</span>
+      </a>
       <nav class="nav-links">
+        <a href="#habilidades">Especialidades</a>
         <a href="#experiencia">Trayectoria</a>
         <a href="#contacto">Contacto</a>
       </nav>
@@ -25,7 +33,7 @@
   <main>
     <!-- Hero -->
     <section id="inicio" class="hero container">
-      <div class="hero-card">
+      <div class="hero-card reveal">
         <div class="avatar-wrapper">
           <img
             src="assets/avatar.png"
@@ -37,73 +45,140 @@
 
         <div class="hero-info">
           <span class="status-pill">Disponible para proyectos</span>
-          <h1>Hola, soy <span>lunitathebest</span></h1>
+          <h1>lunitathebest</h1>
+          <p class="typewriter-line">
+            <span id="typewriter"></span><span class="cursor">|</span>
+          </p>
           <p class="hero-desc">
-            Founder, Manager y Staff con amplia trayectoria en comunidades, tiendas digitales y servidores de Minecraft. Enfocado en gestión, desarrollo y crecimiento de proyectos.
+            Líder de comunidades, fundador de proyectos digitales y staff experimentado en servidores de Minecraft. Especializado en gestión de equipos, desarrollo y crecimiento estratégico.
           </p>
 
           <div class="hero-actions">
-            <a href="#experiencia" class="btn btn-primary">Ver trayectoria</a>
+            <a href="#experiencia" class="btn btn-primary">Explorar trayectoria</a>
             <button id="copy-discord" class="btn btn-outline" type="button">
-              Copiar Discord: lunitathebest
+              Discord: lunitathebest
             </button>
           </div>
         </div>
       </div>
 
-      <!-- Estadísticas dinámicas -->
-      <div class="stats-grid">
+      <!-- Contadores animados -->
+      <div class="stats-grid reveal">
         <div class="stat-box">
-          <strong id="stat-total">0</strong>
-          <span>Proyectos totales</span>
+          <strong class="counter" data-target="12">0</strong>
+          <span>Proyectos Totales</span>
         </div>
         <div class="stat-box">
-          <strong id="stat-active">0</strong>
-          <span>Cargos actuales</span>
+          <strong class="counter" data-target="3">0</strong>
+          <span>Cargos Activos</span>
         </div>
         <div class="stat-box">
-          <strong id="stat-leadership">0</strong>
+          <strong class="counter" data-target="7">0</strong>
           <span>Dirección / Founder</span>
+        </div>
+        <div class="stat-box">
+          <strong class="counter" data-target="5">0</strong>
+          <span>Staff &amp; Dev</span>
         </div>
       </div>
     </section>
 
-    <!-- Sección de Trayectoria -->
-    <section id="experiencia" class="experience container">
+    <!-- Habilidades / Especialidades -->
+    <section id="habilidades" class="skills container reveal">
       <div class="section-header">
         <div>
-          <h2>Experiencia &amp; Proyectos</h2>
-          <p>Filtra por estado o especialidad para explorar cada proyecto.</p>
+          <h2>Especialidades</h2>
+          <p>Áreas clave donde aporto valor dentro de cada proyecto.</p>
+        </div>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-head">
+            <span>Gestión &amp; Dirección de Staff</span>
+            <strong>98%</strong>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-width="98%"></div></div>
         </div>
 
-        <div class="filters" role="tablist" aria-label="Filtros de experiencia">
-          <button class="filter-btn active" data-filter="all">Todos</button>
-          <button class="filter-btn" data-filter="active">Actuales</button>
-          <button class="filter-btn" data-filter="leadership">Founder &amp; Manager</button>
-          <button class="filter-btn" data-filter="staff">Staff &amp; Dev</button>
+        <div class="skill-card">
+          <div class="skill-head">
+            <span>Administración de Comunidades</span>
+            <strong>95%</strong>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-width="95%"></div></div>
         </div>
+
+        <div class="skill-card">
+          <div class="skill-head">
+            <span>Fundación &amp; Estrategia de Proyectos</span>
+            <strong>92%</strong>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-width="92%"></div></div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-head">
+            <span>Desarrollo &amp; Configuración</span>
+            <strong>85%</strong>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-width="85%"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experiencia -->
+    <section id="experiencia" class="experience container">
+      <div class="section-header reveal">
+        <div>
+          <h2>Experiencia &amp; Proyectos</h2>
+          <p>Haz clic en cualquier tarjeta para ver el detalle completo.</p>
+        </div>
+
+        <div class="controls-bar">
+          <input
+            type="search"
+            id="search-input"
+            class="search-input"
+            placeholder="Buscar servidor o rango..."
+            aria-label="Buscar servidor o rango"
+          />
+          <div class="view-toggle" role="group" aria-label="Cambiar vista">
+            <button class="view-btn active" data-view="grid" type="button">Tarjetas</button>
+            <button class="view-btn" data-view="timeline" type="button">Timeline</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="filters reveal" role="tablist" aria-label="Filtros de experiencia">
+        <button class="filter-btn active" data-filter="all">Todos (12)</button>
+        <button class="filter-btn" data-filter="active">Actuales</button>
+        <button class="filter-btn" data-filter="leadership">Founder &amp; Manager</button>
+        <button class="filter-btn" data-filter="staff">Staff &amp; Dev</button>
       </div>
 
       <div id="cards-grid" class="cards-grid"></div>
+      <p id="empty-state" class="empty-state" hidden>No se encontraron proyectos con ese filtro.</p>
     </section>
 
     <!-- Contacto -->
-    <section id="contacto" class="contact container">
+    <section id="contacto" class="contact container reveal">
       <div class="contact-card">
-        <h2>¿Trabajamos juntos?</h2>
-        <p>Si buscas gestión, liderazgo o desarrollo para tu servidor o comunidad, contáctame directamente por Discord.</p>
+        <span class="status-pill">Contacto Directo</span>
+        <h2>¿Necesitas un Manager, Founder o Dev?</h2>
+        <p>Escríbeme por Discord para hablar sobre tu servidor, tienda o comunidad.</p>
         <button id="copy-discord-footer" class="btn btn-primary" type="button">
-          Discord: lunitathebest
+          Copiar Discord: lunitathebest
         </button>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <p>&copy; <span id="year"></span> lunitathebest — Portafolio Profesional</p>
+    <p>&copy; <span id="year"></span> lunitathebest — Todos los derechos reservados</p>
   </footer>
 
-  <!-- Modal de detalles -->
+  <!-- Modal -->
   <div id="modal" class="modal" aria-hidden="true">
     <div class="modal-backdrop"></div>
     <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-title">
@@ -117,12 +192,13 @@
         </div>
       </div>
       <p id="modal-desc" class="modal-desc"></p>
+      <div id="modal-tags" class="modal-tags"></div>
     </div>
   </div>
 
-  <!-- Notificación Toast -->
+  <!-- Toast -->
   <div id="toast" class="toast" role="status" aria-live="polite">
-    Usuario copiado al portapapeles
+    Usuario "lunitathebest" copiado al portapapeles
   </div>
 
   <script src="script.js"></script>
